@@ -1,0 +1,25 @@
+A simple file writer asynchronous task for android, writes to internal storage.
+
+Usage:
+	static AsyncTask<LinkedBlockingQueue<String[]>, Void, Void> fw;
+	static LinkedBlockingQueue<String[]> writelist;
+	writelist = new LinkedBlockingQueue<String[]>();
+	fw = new FileWriter().execute(writelist);
+
+	Then pass the instance of writelist to any class or thread that needs to be
+able to write to a file.
+
+	To write to a file:
+
+	String[] params = new String[items+3]; // items = number of lines
+	params[0] = "file name.ext";
+	params[1] = "n"; // "a" to append instead of overwrite
+	params[2] = "n"; // "" to not put a new line in every param_i after this
+	/*
+		It prints each item after this as a "line". If you have params[2] = "n",
+		then it will place '\n' after each "line".
+	*/
+  params[3...] = "some line"
+	writelist.put(params);
+
+Tested on 2.2 and 2.3.
